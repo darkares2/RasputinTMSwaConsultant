@@ -5,7 +5,7 @@ import App from './App';
 
 class Doc extends React.Component{
     componentDidMount(){
-      document.title = "RasputinTM Client Menu"
+      document.title = "RasputinTM Consultant Menu"
     }
   
     render(){

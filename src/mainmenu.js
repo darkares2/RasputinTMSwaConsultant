@@ -1,6 +1,7 @@
 import React from 'react';
+import { SlotMenu } from './slotmenu';
 
-const scheduleMenu = 'scheduleMenu';
+const slotMenu = 'slotMenu';
 const listAppointments = 'listAppointments';
 
 class MainMenu extends React.Component {
@@ -9,7 +10,7 @@ class MainMenu extends React.Component {
         super(props);
         const search = window.location.search;
         const userID = new URLSearchParams(search).get("userID");
-        this.state = { user: null, userID: userID, error: 'loading...', currentSubmenu: '', serviceList: [], appointmentList: [] };
+        this.state = { user: null, userID: userID, error: 'loading...', currentSubmenu: ''};
     }
 
     componentDidMount() {
@@ -41,16 +42,12 @@ class MainMenu extends React.Component {
         })();
     }
 
-    onScheduleAppointment = () => {
-        this.setState({currentSubmenu: scheduleMenu, serviceList: [{name: 'Hals'}, {name: 'Generelt'}]})
+    onSlots = () => {
+        this.setState({currentSubmenu: slotMenu});
     }
 
-    onListAppointments = () => {
-        this.setState({currentSubmenu: listAppointments, appointmentList: [{name: 'Hals'}, {name: 'Generelt'}]})
-    }
-
-    onClickScheduleService = (event, serviceName) => {
-        alert("Service chosen: " + serviceName);
+    onAppointments = () => {
+        this.setState({currentSubmenu: listAppointments});
     }
 
     render() {
@@ -92,32 +89,22 @@ class MainMenu extends React.Component {
             display: 'block'
         };
 
-        var scheduleSubMenu = <span/>;
-        if (this.state.currentSubmenu === scheduleMenu) {
-            const items = this.state.serviceList.map(service => (
-                <button style={buttonStyle} onClick={e=>{ this.onClickScheduleService(e, service.name); }} key={service.name}>
-                  {service.name}
-                </button>
-              ));
-            scheduleSubMenu = <div style={formStyle}>{items}</div>;
+        var slotSubMenu = <span/>;
+        if (this.state.currentSubmenu === slotMenu) {
+            slotSubMenu = <SlotMenu userID={this.state.userID} />;
         }
-        var appointmentListSubMenu = <span/>;
+        var appointmentSubMenu = <span/>;
         if (this.state.currentSubmenu === listAppointments) {
-            const items = this.state.appointmentList.map(appointment => (
-                <button style={buttonStyle} onClick={e=>{ this.onClickScheduleService(e, appointment.name); }} key={appointment.name}>
-                  {appointment.name}
-                </button>
-              ));
-              appointmentListSubMenu = <div style={formStyle}>{items}</div>;
+            appointmentSubMenu = <div />;
         }
 
         return (
             <div style={formStyle}>
                 <span style={labelStyle}>Welcome {this.state.user.Name}</span>
-                <input type="button" value="Schedule new appointment" style={buttonStyle} onClick={this.onScheduleAppointment} />
-                {scheduleSubMenu}
-                <input type="button" value="List appointments" style={buttonStyle} onClick={this.onListAppointments} />
-                {appointmentListSubMenu}
+                <input type="button" value="Slots" style={buttonStyle} onClick={this.onSlots} />
+                {slotSubMenu}
+                <input type="button" value="Appointments" style={buttonStyle} onClick={this.onAppointments} />
+                {appointmentSubMenu}
             </div>
         );
     }
