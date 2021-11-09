@@ -45,8 +45,8 @@ class SlotList extends React.Component {
 
         (async function () {
             var text = null;
-            const url = 'http://localhost:7073';
-            //const url = 'https://rasputintmfaslotservice.azurewebsites.net';
+            //const url = 'http://localhost:7073';
+            const url = 'https://rasputintmfaslotservice.azurewebsites.net';
             await fetch(url + '/api/GetSlot?UserID=' + current.props.userID)
                 .then(response => {
                     console.log("Response: ", response);
