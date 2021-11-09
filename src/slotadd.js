@@ -65,7 +65,7 @@ class SlotAdd extends React.Component {
                 body: JSON.stringify({ userID: current.props.userID, timeslot: current.state.timeslot, serviceIDs: current.state.selectedServices })
             };
             //const url = 'http://localhost:7073';
-            const url = 'https://rasputintmfauserservice.azurewebsites.net';
+            const url = 'https://rasputintmfaslotservice.azurewebsites.net';
             await fetch(url + '/api/CreateSlot', requestOptions)
                   .then(response => { 
                     console.log("Response: ", response);

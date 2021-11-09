@@ -1,5 +1,6 @@
 import React from 'react';
 import { SlotAdd } from './slotadd';
+import { SlotList } from './slotlist';
 
 const viewListSlots = 'viewslots';
 const viewAddSlots = 'viewadd';
@@ -13,6 +14,10 @@ class SlotMenu extends React.Component {
 
     onAddSlots = () => {
         this.setState({currentSubmenu: viewAddSlots});
+    }
+
+    onListSlots = () => {
+        this.setState({currentSubmenu: viewListSlots});
     }
 
     render() {
@@ -46,12 +51,18 @@ class SlotMenu extends React.Component {
         if (this.state.currentSubmenu === viewAddSlots) {
             addSlotsView = <SlotAdd userID={this.props.userID} />;
         }
+        var listSlotsView = <span/>;
+        if (this.state.currentSubmenu === viewListSlots) {
+            listSlotsView = <SlotList userID={this.props.userID} />;
+        }
 
         return (
             <div style={formStyle}>
                 <span style={labelStyle}>Slot menu:</span>
                 <input type="button" value="Add slots" style={buttonStyle} onClick={this.onAddSlots} />
                 {addSlotsView}
+                <input type="button" value="List slots" style={buttonStyle} onClick={this.onListSlots} />
+                {listSlotsView}
             </div>
         );
     }
