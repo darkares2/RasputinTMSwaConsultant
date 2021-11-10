@@ -65,52 +65,6 @@ class SlotList extends React.Component {
     }
 
     render() {
-        const tableStyle = {
-            margin: 'auto',
-            padding: '10px',
-            border: '1px solid #c9c9c9',
-            borderRadius: '5px',
-            fontSize: '10px',
-            background: '#f5f5f5',
-            width: '800px',
-            position: 'relative',
-            left: '-400px',
-            display: 'block'
-        };
-        const iconStyle = {
-            color: '#aaa',
-            paddingLeft: '5px',
-            paddingRight: '5px'
-          };
-
-          const columns = [
-            {
-                header: 'SlotID',
-                key: 'SlotID',
-                defaultSorting: 'ASC',
-                headerStyle: { backgroundColor: '#20DAB9', width: '200px' },
-                dataProps: { className: 'align-right' }
-              },
-              {
-              header: 'UserID',
-              key: 'UserID',
-              headerStyle: { backgroundColor: '#20DAB9', width: '200px' },
-            },
-            {
-              header: 'Timeslot',
-              key: 'Timeslot',
-              defaultSorting: 'DESC',
-              headerStyle: { backgroundColor: '#20DAB9', width: '200px' },
-              headerProps: { className: 'align-left' },
-            },
-            {
-              header: 'Services',
-              key: 'ServiceNames',
-              headerStyle: { backgroundColor: '#20DAB9', width: '200px' },
-              sortable: false
-            }
-          ];
-
         const data = this.state.slots.map((slot)=> {
             const serviceIDs = slot.ServiceIDs.split(',');
             if (serviceIDs.length > 0) {
