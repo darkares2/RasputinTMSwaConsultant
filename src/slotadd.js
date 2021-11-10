@@ -7,7 +7,7 @@ class SlotAdd extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { error: '', timeslot: new Date(), services: [], selectedServices: [] };
+        this.state = { error: '', timeslot: new Date(), services: [], selectedServices: [], disabled: false };
     }
 
     componentDidMount() {
@@ -55,6 +55,10 @@ class SlotAdd extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        if (this.state.disabled) {
+            return;
+        }
+        this.setState({disabled: true});
         const current = this;
   
           (async function () {      
@@ -69,6 +73,7 @@ class SlotAdd extends React.Component {
             await fetch(url + '/api/CreateSlot', requestOptions)
                   .then(response => { 
                     console.log("Response: ", response);
+                    current.setState({disabled: false});
                     if (response.status >= 400 && response.status < 600) {
                       current.setState({ error: response.statusText});
                     }
@@ -85,43 +90,17 @@ class SlotAdd extends React.Component {
       }
   
     render() {
-        const formStyle = {
-            margin: 'auto',
-            padding: '10px',
-            border: '1px solid #c9c9c9',
-            borderRadius: '5px',
-            background: '#f5f5f5',
-            width: '220px',
-            display: 'block'
-        };
-        const labelStyle = {
-            margin: '10px 0 5px 0',
-            fontFamily: 'Arial, Helvetica, sans-serif',
-            fontSize: '15px',
-        };
-        const buttonStyle = {
-            margin: '10px 0 0 0',
-            padding: '7px 10px',
-            border: '1px solid #efffff',
-            borderRadius: '3px',
-            background: '#3085d6',
-            width: '100%',
-            fontSize: '15px',
-            color: 'white',
-            display: 'block'
-        };
-
-
         const services = this.state.services.map((service) => { return { value: service.ServiceID, label: service.Name} } );
         const animatedComponents = makeAnimated();
 
         return (
-            <form style={formStyle} onSubmit={this.handleSubmit}>
-            <label style={labelStyle}>
+            <form className="fancy" onSubmit={this.handleSubmit}>
+            <label>
               Timeslot:
               <DateTimePicker onChange={(value) => this.setState({timeslot: value}) } value={this.state.timeslot} locale="da-DK" />
             </label>
-            <label style={labelStyle}>
+            <br/>
+            <label>
               Services:
               <Select options={services}
                 closeMenuOnSelect={false}
@@ -131,7 +110,7 @@ class SlotAdd extends React.Component {
                />
             </label>
             <span>{this.state.error}</span>
-            <input type="submit" value="Submit" style={buttonStyle} />
+            <button className="button-7" type="submit" disabled={this.state.disabled} >{this.state.disabled ? 'Adding...' : 'Add'}</button>
           </form>
           );
     }

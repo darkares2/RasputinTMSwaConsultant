@@ -1,5 +1,6 @@
 import React from 'react';
 import { SlotMenu } from './slotmenu';
+import { AppointmentList } from './appointmentlist'
 
 const slotMenu = 'slotMenu';
 const listAppointments = 'listAppointments';
@@ -55,47 +56,22 @@ class MainMenu extends React.Component {
             return <div>{this.state.error}</div>;
         }
 
-        const formStyle = {
-            margin: 'auto',
-            padding: '10px',
-            border: '1px solid #c9c9c9',
-            borderRadius: '5px',
-            background: '#f5f5f5',
-            width: '220px',
-            display: 'block'
-        };
-        const labelStyle = {
-            margin: '10px 0 5px 0',
-            fontFamily: 'Arial, Helvetica, sans-serif',
-            fontSize: '15px',
-        };
-        const buttonStyle = {
-            margin: '10px 0 0 0',
-            padding: '7px 10px',
-            border: '1px solid #efffff',
-            borderRadius: '3px',
-            background: '#3085d6',
-            width: '100%',
-            fontSize: '15px',
-            color: 'white',
-            display: 'block'
-        };
-
         var slotSubMenu = <span/>;
         if (this.state.currentSubmenu === slotMenu) {
             slotSubMenu = <SlotMenu userID={this.state.userID} />;
         }
         var appointmentSubMenu = <span/>;
         if (this.state.currentSubmenu === listAppointments) {
-            appointmentSubMenu = <div />;
+            appointmentSubMenu = <AppointmentList userID={this.state.userID} />;
         }
 
         return (
-            <div style={formStyle}>
-                <span style={labelStyle}>Welcome {this.state.user.Name}</span>
-                <input type="button" value="Slots" style={buttonStyle} onClick={this.onSlots} />
+            <div className="fancy">
+                <h1>Welcome {this.state.user.Name}</h1>
+                <button className="button-7" type="button" onClick={this.onSlots} >Slots</button>
                 {slotSubMenu}
-                <input type="button" value="Appointments" style={buttonStyle} onClick={this.onAppointments} />
+                <br/>
+                <button className="button-7" type="button" onClick={this.onAppointments} >Appointments</button>
                 {appointmentSubMenu}
             </div>
         );

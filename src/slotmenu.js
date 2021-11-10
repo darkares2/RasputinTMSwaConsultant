@@ -21,32 +21,6 @@ class SlotMenu extends React.Component {
     }
 
     render() {
-        const formStyle = {
-            margin: 'auto',
-            padding: '10px',
-            border: '1px solid #c9c9c9',
-            borderRadius: '5px',
-            background: '#f5f5f5',
-            width: '220px',
-            display: 'block'
-        };
-        const labelStyle = {
-            margin: '10px 0 5px 0',
-            fontFamily: 'Arial, Helvetica, sans-serif',
-            fontSize: '15px',
-        };
-        const buttonStyle = {
-            margin: '10px 0 0 0',
-            padding: '7px 10px',
-            border: '1px solid #efffff',
-            borderRadius: '3px',
-            background: '#3085d6',
-            width: '100%',
-            fontSize: '15px',
-            color: 'white',
-            display: 'block'
-        };
-
         var addSlotsView = <span/>;
         if (this.state.currentSubmenu === viewAddSlots) {
             addSlotsView = <SlotAdd userID={this.props.userID} />;
@@ -57,11 +31,11 @@ class SlotMenu extends React.Component {
         }
 
         return (
-            <div style={formStyle}>
-                <span style={labelStyle}>Slot menu:</span>
-                <input type="button" value="Add slots" style={buttonStyle} onClick={this.onAddSlots} />
+            <div className="fancy">
+                <h1>Slot menu:</h1>
+                <button className="button-7" type="button" onClick={this.onAddSlots} >Add slots</button>
                 {addSlotsView}
-                <input type="button" value="List slots" style={buttonStyle} onClick={this.onListSlots} />
+                <button className="button-7" type="button" onClick={this.onListSlots} >List slots</button>
                 {listSlotsView}
             </div>
         );

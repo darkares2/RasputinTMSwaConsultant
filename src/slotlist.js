@@ -1,6 +1,5 @@
 import React from 'react';
-import SortableTable from 'react-sortable-table';
-
+import {SlotTable} from './slottable';
 
 class SlotList extends React.Component {
 
@@ -125,11 +124,8 @@ class SlotList extends React.Component {
         console.log("Data: ", data);
 
         return (
-            <SortableTable
-                data={data}
-                columns={columns}
-                style={tableStyle}
-                iconStyle={iconStyle} />          );
+            <SlotTable slots={data} />
+        );
     }
 }
 
