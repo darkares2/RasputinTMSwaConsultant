@@ -39,6 +39,8 @@ class AppointmentTable extends React.Component {
                   <td>{this.convertUTCToLocalTime(appointment.Timeslot).toLocaleString("da-DK")}</td>
                   <td>{appointment.UserName}</td>
                   <td>{appointment.ServiceName}</td>
+                  <td><button className="button-7" type="button" onClick={ () => this.props.onEnterAppointment(appointment.AppointmentID)} >Enter appointment</button></td>
+                  <td><button className="button-7" type="button" onClick={ () => this.props.onCloseAppointment(appointment.AppointmentID)} >Close appointment</button></td>
                 </tr>
               ))}
             </tbody>

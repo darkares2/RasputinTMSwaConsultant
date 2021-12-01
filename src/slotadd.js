@@ -7,7 +7,7 @@ class SlotAdd extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { error: '', timeslot: new Date(), services: [], selectedServices: [], disabled: false };
+        this.state = { error: '', timeslot: new Date(Date.now() + (3600 * 1000 * 24 * 7)), services: [], selectedServices: [], disabled: false };
     }
 
     componentDidMount() {
@@ -84,7 +84,8 @@ class SlotAdd extends React.Component {
                   if (text !== null) {
                       current.setState({ error: ''});
                       console.log(text);
-                      current.setState({timeslot: new Date()});
+                      current.setState({timeslot: new Date(Date.now() + (3600 * 1000 * 24 * 7))});
+                      alert("New slot added");
                   }
           })();
       }
