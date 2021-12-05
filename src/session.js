@@ -11,7 +11,8 @@ class Session extends React.Component {
     componentDidUpdate(prevProps) {
         if (this.props.openSession !== prevProps.openSession) {
             this.setState({notes: []});
-            this.loadNotes(this.props.openSession);
+            if (this.props.openSession !== undefined)
+                this.loadNotes(this.props.openSession);
         }
     }
 
@@ -83,7 +84,7 @@ class Session extends React.Component {
     }
     
     render() {        
-        if (this.props.openSession === null)
+        if (this.props.openSession === null || this.props.openSession === undefined)
             return null;
 
 

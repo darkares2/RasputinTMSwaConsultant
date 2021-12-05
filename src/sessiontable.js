@@ -47,6 +47,7 @@ class SessionTable extends React.Component {
                 <td>{session.UserName}</td>
                 <td>{session.SlotUserName}</td>
                 <td>{buttonText}</td>
+                <td><button className="button-7" type="button" onClick={ () => this.props.onCloseSession(session.SessionID)} >Close session</button></td>
               </tr>
             )})}
           </tbody>
